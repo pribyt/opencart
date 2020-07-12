@@ -4,8 +4,8 @@ MAINTAINER Thiago Barradas <th.barradas@gmail.com>
 # VARIABLES
 ENV OPENCART_VERSION=3.0.2.0
 ENV ADMIN_USERNAME="admin" 
-ENV ADMIN_EMAIL="admin-opencart@mailinator.com" 
-ENV ADMIN_PASSWORD="Mudar123"
+ENV ADMIN_EMAIL="pribytkovskiy.d@gmail.com" 
+ENV ADMIN_PASSWORD="jfyvd7673"
 
 # GET OPENCART FILES
 WORKDIR /var/www/html

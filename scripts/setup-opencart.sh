@@ -1,10 +1,7 @@
 sleep 30
 
-sed -i 's/MyISAM/InnoDB/g' /app/install/opencart.sql
-mysqladmin create opencart 
-mysqladmin -u root password Temp123
-php /app/install/cli_install.php install --db_hostname localhost --db_username root --db_password Temp123 --db_database opencart --db_driver mysqli --username $ADMIN_USERNAME --password $ADMIN_PASSWORD --email $ADMIN_EMAIL --http_server http://localhost/
-mysqladmin -u root -pTemp123 password ""
+php /app/install/cli_install.php install --db_hostname 10.0.0.2 --db_username fast_oc2 --db_password L@sVega$ --db_database fast_oc2 --db_driver mysqli --username $ADMIN_USERNAME --password $ADMIN_PASSWORD --email $ADMIN_EMAIL --http_server https://dev.dejafashion.neogenos.com
+
 rm -f /app/config.php /app/config-dist.php
 mv /app/_config.php /app/config.php
 rm -f /app/admin/config.php /app/admin/config-dist.php

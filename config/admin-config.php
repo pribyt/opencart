@@ -1,10 +1,10 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/admin/');
-define('HTTP_CATALOG', 'http://localhost/');
+define('HTTP_SERVER', 'https://dev.dejafashion.neogenos.com/admin/');
+define('HTTP_CATALOG', 'https://dev.dejafashion.neogenos.com');
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/admin/');
-define('HTTPS_CATALOG', 'http://localhost/');
+define('HTTPS_SERVER', 'https://dev.dejafashion.neogenos.com/admin/');
+define('HTTPS_CATALOG', 'https://dev.dejafashion.neogenos.com');
 // DIR
 define('DIR_APPLICATION', '/app/admin/');
 define('DIR_SYSTEM', '/app/system/');

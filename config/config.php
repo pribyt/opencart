@@ -1,8 +1,8 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/');
+define('HTTP_SERVER', 'https://dev.dejafashion.neogenos.com');
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/');
+define('HTTPS_SERVER', 'https://dev.dejafashion.neogenos.com');
 // DIR
 define('DIR_APPLICATION', '/app/catalog/');
 define('DIR_SYSTEM', '/app/system/');
