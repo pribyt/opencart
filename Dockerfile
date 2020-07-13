@@ -1,38 +1,72 @@
-FROM thiagobarradas/lamp:php-7.2
-MAINTAINER Thiago Barradas <th.barradas@gmail.com>
+FROM php:7.4-apache
+MAINTAINER dima
 
-# VARIABLES
-ENV OPENCART_VERSION=3.0.2.0
-ENV ADMIN_USERNAME="admin" 
-ENV ADMIN_EMAIL="pribytkovskiy.d@gmail.com" 
-ENV ADMIN_PASSWORD="jfyvd7673"
+ENV VIRTUAL_HOST=dev.apps.neogenos.com 
+ENV APACHE_DOCUMENT_ROOT=/mnt
 
-# GET OPENCART FILES
-WORKDIR /var/www/html
-RUN rm -f * && mkdir tmp
-WORKDIR /var/www/html/tmp
-RUN ls -l
-RUN wget -O opencart-$OPENCART_VERSION.zip https://codeload.github.com/opencart/opencart/zip/$OPENCART_VERSION
-RUN chmod -R 755 /app
+# apache user
+RUN usermod -u 1000 www-data \
+    && groupmod -g 1000 www-data
 
-# UNZIP OPENCART
-RUN unzip opencart-$OPENCART_VERSION.zip
-WORKDIR /var/www/html/tmp/opencart-$OPENCART_VERSION
-RUN composer install
-RUN cp -a upload/. /var/www/html
-COPY config/config.php /var/www/html/_config.php
-COPY config/admin-config.php /var/www/html/admin/_config.php
+# extension
+RUN apt-get update \
+    && apt-get install -y \
+        libfreetype6-dev \
+        libmagickwand-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng-dev \
+        libzip-dev \
+        jpegoptim \
+        optipng \
+        gifsicle \
+        sendmail \
+        git-core \
+        build-essential \
+        openssl \
+        libssl-dev \
+        libonig-dev \
+        python2.7 \
+        zip \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install -j$(nproc) zip \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install gettext \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-enable mysqli \
+    && pecl install xdebug-beta \
+        imagick \
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable imagick \
+    && ln -s /usr/bin/python2.7 /usr/bin/python
 
-# CLEAN TMP FILES
-RUN rm -rf tmp
-RUN apt purge && apt-get autoremove -y && apt-get clean
+# ioncube loader
+RUN curl -fSL 'http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz' -o ioncube.tar.gz \
+    && mkdir -p ioncube \
+    && tar -xf ioncube.tar.gz -C ioncube --strip-components=1 \
+    && rm ioncube.tar.gz \
+    && mv ioncube/ioncube_loader_lin_7.4.so /var/www/ioncube_loader_lin_7.4.so \
+    && rm -r ioncube
 
-# COPY SCRIPT TO SETUP OPENCART
-COPY scripts/supervisord-zopencart.conf /etc/supervisor/conf.d/supervisord-zopencart.conf
-COPY scripts/setup-opencart.sh /setup-opencart.sh
+# composer
+RUN curl -S https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer self-update
 
-# EXPOSE AND RUN
-RUN chmod -R 755 /var/www/html
-WORKDIR /var/www/html
-EXPOSE 80 3306
-CMD ["/run.sh"]
+# php.ini
+COPY config/php.ini /usr/local/etc/php/
+
+# apache user
+RUN usermod -u 1000 www-data \
+    && groupmod -g 1000 www-data
+
+# apache
+RUN a2enmod rewrite
+RUN a2enmod ssl
+
+COPY entrypoint.sh /usr/local/bin/
+RUN ["chmod", "+x", "/usr/local/bin/entrypoint.sh"]
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
