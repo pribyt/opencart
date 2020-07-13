@@ -1,8 +1,8 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'https://dev.dejafashion.neogenos.com');
+define('HTTP_SERVER', 'https://dev.apps.neogenos.com/');
 // HTTPS
-define('HTTPS_SERVER', 'https://dev.dejafashion.neogenos.com');
+define('HTTPS_SERVER', 'https://dev.apps.neogenos.com/');
 // DIR
 define('DIR_APPLICATION', '/app/catalog/');
 define('DIR_SYSTEM', '/app/system/');
@@ -19,9 +19,9 @@ define('DIR_SESSION', DIR_STORAGE . 'session/');
 define('DIR_UPLOAD', DIR_STORAGE . 'upload/');
 // DB
 define('DB_DRIVER', 'mysqli');
-define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'opencart');
+define('DB_HOSTNAME', '10.0.0.2');
+define('DB_USERNAME', 'fast_oc2');
+define('DB_PASSWORD', 'L@sVega$');
+define('DB_DATABASE', 'fast_oc2');
 define('DB_PORT', '3306');
 define('DB_PREFIX', 'oc_');
