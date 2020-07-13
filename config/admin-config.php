@@ -6,11 +6,11 @@ define('HTTP_CATALOG', 'https://dev.apps.neogenos.com/');
 define('HTTPS_SERVER', 'https://dev.apps.neogenos.com/admin/');
 define('HTTPS_CATALOG', 'https://dev.apps.neogenos.com');
 // DIR
-define('DIR_APPLICATION', '/app/admin/');
-define('DIR_SYSTEM', '/app/system/');
-define('DIR_IMAGE', '/app/image/');
-define('DIR_STORAGE', '/app-pvt/storage/');
-define('DIR_CATALOG', '/app/catalog/');
+define('DIR_APPLICATION', '/mnt/admin/');
+define('DIR_SYSTEM', '/mnt/system/');
+define('DIR_IMAGE', '/mnt/image/');
+define('DIR_STORAGE', '/mnt/system/storage192mxaevcsb8/');
+define('DIR_CATALOG', '/mnt/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');

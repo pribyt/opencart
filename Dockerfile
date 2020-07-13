@@ -32,7 +32,7 @@ COPY scripts/supervisord-zopencart.conf /etc/supervisor/conf.d/supervisord-zopen
 COPY scripts/setup-opencart.sh /setup-opencart.sh
 
 # EXPOSE AND RUN
-RUN chmod -R 777 /var/www/html
+RUN chmod -R 755 /var/www/html
 WORKDIR /var/www/html
 EXPOSE 80 3306
 CMD ["/run.sh"]

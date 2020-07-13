@@ -10,5 +10,5 @@ mkdir /app-pvt && mkdir /app-pvt/storage
 mv /app/system/storage/* /app-pvt/storage
 rm -rf /app/install
 
-chmod -R 777 /app /app-pvt
+chmod -R 755 /app /app-pvt
 rm -f /etc/supervisor/conf.d/supervisord-zopencart.conf
