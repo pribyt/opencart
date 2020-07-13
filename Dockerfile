@@ -1,8 +1,8 @@
 FROM php:7.4-apache
 MAINTAINER dima
 
-ENV VIRTUAL_HOST=dev.apps.neogenos.com 
-ENV APACHE_DOCUMENT_ROOT=/mnt
+ENV VIRTUAL_HOST="dev.apps.neogenos.com" 
+ENV APACHE_DOCUMENT_ROOT="/mnt"
 
 # apache user
 RUN usermod -u 1000 www-data \
@@ -23,7 +23,6 @@ RUN apt-get update \
         sendmail \
         git-core \
         build-essential \
-        openssl \
         libssl-dev \
         libonig-dev \
         python2.7 \
@@ -64,9 +63,8 @@ RUN usermod -u 1000 www-data \
 
 # apache
 RUN a2enmod rewrite
-RUN a2enmod ssl
 
 COPY entrypoint.sh /usr/local/bin/
 RUN ["chmod", "+x", "/usr/local/bin/entrypoint.sh"]
-
+EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
