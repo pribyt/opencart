@@ -7,6 +7,7 @@ shopt -s nullglob
 echo "127.0.0.1 $(hostname).localdomain $(hostname)" >> /etc/hosts
 
 # document root
+APACHE_DOCUMENT_ROOT=/mnt
 echo "${APACHE_DOCUMENT_ROOT}"
 
 if test "${APACHE_DOCUMENT_ROOT}" != ""; then

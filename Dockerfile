@@ -1,5 +1,5 @@
 FROM php:7.4-apache
-MAINTAINER dima
+MAINTAINER pribytkovskiy.d@gmail.com
 
 ENV VIRTUAL_HOST="dev.apps.neogenos.com" 
 ENV APACHE_DOCUMENT_ROOT="/mnt"
